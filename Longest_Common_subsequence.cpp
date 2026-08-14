@@ -2,7 +2,7 @@
 using namespace std;
 
 int LCS(char X[],char Y[],int n,int m){
-    int L[m+1][n+1];
+    int L[n+1][m+1];
 
     for(int i=0;i<=n;i++){
         for(int j=0;j<=m;j++){
