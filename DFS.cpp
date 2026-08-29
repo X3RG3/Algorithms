@@ -1,5 +1,4 @@
 
-
 #include <iostream>
 using namespace std;
 
@@ -8,8 +7,8 @@ int e[] = {2,2,2,2,2,2,3,3};
 int list[20][20] = {{3,7},{4,7},{5,7},{0,6},{1,6},{2,6},{3,4,5},{0,1,2}};
 
 int checked[20];
-int que[20];
-int first=0,last=0;
+int stk[20];
+int top = 0;
 
 int notChecked(int n){
 	if(checked[n] == 1){
@@ -17,28 +16,36 @@ int notChecked(int n){
 	}
 	return 1;
 }
-void enq(int n){
+void push(int n){
 	checked[n] = 1;
-	que[last] = n;
-	last++;
+	cout<<c[n]<<" ";
+	stk[top] = n;
+	top++;
 }
-int dq(){
-	cout<<c[que[first]]<<" ";
-	first++;
-	return que[first - 1];
+int pop(){
+
+	top = top - 1;
+	return stk[top];
 }
 
 int main(){
 
-	int i,j,n;
-	enq(7);
+	int i,n,f=0;
+	push(7);
 
-	while(first<last){
-		n = dq();
-		for (i = 0; i<e[n]; i++){
+	while(top != 0){
+		n = stk[top-1];
+		for (i = 0; i<e[n]; i++){ // for directed  f = 0 for loop er age hobe 
+			f = 0;
 			if(notChecked(list[n][i]) == 1){
-				enq(list[n][i]);
+
+				push(list[n][i]);
+				f = 1;
+				break;
 			}
+		}
+		if (f == 0){
+			pop();
 		}
 
 	}
@@ -47,3 +54,12 @@ int main(){
 
 	return 0;
 }
+
+
+
+
+
+
+
+
+
